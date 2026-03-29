@@ -72,6 +72,7 @@ const App = () => {
           display: "flex",
           flexDirection: "row",
           gap: "24px",
+          flexWrap: "wrap",
           justifyContent: "center",
         }}
       >
