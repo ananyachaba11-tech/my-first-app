@@ -104,8 +104,9 @@ const App = () => {
         style={{
           display: "grid",
           gap: "8px 24px",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, 220px)",
           padding: "35px",
+          justifyContent: "start",
         }}
       >
         {filteredPokemons.map((d) => (
