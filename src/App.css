@@ -23,6 +23,7 @@ h1 {
   background-color: white;
   border-radius: 20%;
   transition: background-color 0.2s ease;
+  flex-wrap: wrap;
 }
 
 .button:hover {
