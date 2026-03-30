@@ -92,12 +92,29 @@ const App = () => {
   } else if (selectedType === "Favourites") {
     filteredPokemons = pokemons.filter((p) => favourites.includes(p.id));
   } else {
-    filteredPokemons = pokemons.filter((p) => p.type === selectedType);
+    filteredPokemons = pokemons.filter(
+      (p) => p.type.toLowerCase() === selectedType.toLowerCase(),
+    );
   }
+
+  /*
+  "Fire.toLowerCase() gives "fire"
+  this is helpful when people write things in the input box in lower case. it takes both lower case and upper case values now.
+  */
 
   return (
     <div>
       <h1>Pokemon Explorer</h1>
+
+      <input
+        className="inputbox"
+        placeholder="Enter a type name..."
+        value={selectedType}
+        onChange={(e) => {
+          setSelectedType(e.target.value);
+        }}
+        style={{ marginTop: 12 }}
+      />
 
       {/*Adding buttons in a flex container */}
       <div
@@ -141,6 +158,7 @@ const App = () => {
           justifyContent: "center",
         }}
       >
+        {/* at this point, depending on the selected state/button pressed, the filtered pokemons will either have all pokemon data, specific type of pokemon data, or only liked pokemon data. using this data, we render cards. */}
         {filteredPokemons.map((d) => (
           <Card
             key={d.id}

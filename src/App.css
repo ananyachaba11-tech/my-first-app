@@ -102,3 +102,23 @@ h1 {
 .card.rock {
   background-color: #ddd3c3;
 }
+
+.inputbox {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8px;
+  margin-bottom: 50px;
+  padding: 5px;
+  border-color: #2a75bb;
+  border-width: 7px;
+  font-size: 15px;
+  width: 100px;
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background-color: #e9ecef;
+}
+
+/*
+by default, <input> is inline. They sit like text in a line. display: block makes CSS treat input like a full-width box.
+*/
