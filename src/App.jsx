@@ -27,28 +27,61 @@ const pokemons = [
 
 // extracting unique types for buttons
 
-const allTypes = pokemons.map((p) => p.type); // extract all types using map, this will include duplicates
-const uniqueTypes = new Set(allTypes); // keep only unique values to give Set { "Grass", "Fire", "Water" }. Set is always used with new, not alone. Set keeps unique values, new creates a new instance of this thing.
-const types = [...uniqueTypes]; // the spread operation [...] converts a set back into an array which is needed to use in .map later on
+const allTypes = pokemons.map((value) => {
+  return value.type;
+});
+
+// For every value in the dataset pokemons, give an array of the variable "type". This will include duplicates.
+// Remember: Map transforms every time. Map calls a function on each element of the array. At each iteration, the function returns a new value. All the new values make the final new array.
+// Remember that the dataset pokemons is an array of objects, with each element having multiple properties / key value pairs.
+// The most standard way to access pnroperties in a single object is dot notation datasetname.propertyname followed by bracket notation datasetname["propertyname"]
+// For an array with multiple objects, how would you get the name of the third entry in this dataset? -> pokemons[2].name (try it in terminal in node.js)
+
+const uniqueTypes = new Set(allTypes);
+
+// Set is always used with new, never alone. It is used to extract unique values.
+// new Set(["a", "a", "b", "c"]) will give Set(3) OR {"a", "b", "c"}. This is called a Set (not an object). If it was an object, it would be { a: a, b: b, c: c }. Set is a completely different data structure.
+
+const types = [...uniqueTypes];
+
+// the spread operation [...] converts a set back into an array which is needed to use in .map later on.
+// you could have also done const types = [...new Set(allTypes)].
+
+// note that outside/before you define function App, you write notes with // but after, as you enter JSX, you switch to {/* */}
 
 const App = () => {
+  {
+    /* setting the initial type selected as All: */
+  }
+
   const [selectedType, setSelectedType] = useState("All");
 
   {
-    /* creating an empty array called 'favourites' */
+    /* creating an empty array called 'favourites': */
   }
 
   const [favourites, setFavourites] = useState([]);
 
   /* the below function is used when we click the heart button to add new IDs of pokemons into favourite list */
+  /* if favourites includes the variable id (which could have been x), you change favourites array but filtering out all enteries where the chosen value is
+  equal to the variable id. otherwise, you add that id to favourites array */
 
-  function toggleFavourite(id) {
-    if (favourites.includes(id)) {
-      setFavourites(favourites.filter((value) => value !== id));
+  function toggleFavourite(value) {
+    if (favourites.includes(value)) {
+      setFavourites(favourites.filter((v) => v !== value));
     } else {
-      setFavourites([...favourites, id]);
+      setFavourites([...favourites, value]);
     }
   }
+
+  /* 
+  - your favourites array currently is [25,4]
+  - you click <3 a pikachu with ID = 25.
+  - toggleFavourite(25) runs.
+  - favourites.includes(25) will be true.
+  - favourites.filter((value) => value !== 25), so keep everything except 25. favourites array becomes [4].
+  - note that this function identifies id as we pass id to card below.We can change it to identifier, but then we'll also have to change it below.
+  */
 
   /* A card is produced for each value in filtered pokemons. Filtered pokemons is all pokemons when selectedtype is 
   All. Otherwise, it is a subset of the selected type. */
@@ -79,8 +112,7 @@ const App = () => {
         {/* Adding the all button, which sets the selected type to All on click*/}
 
         <button className="button" onClick={() => setSelectedType("All")}>
-          {" "}
-          All{" "}
+          All
         </button>
 
         {/* Adding buttons for each type, which sets the selected type to that particular type on click*/}
@@ -106,7 +138,7 @@ const App = () => {
           gap: "8px 24px",
           gridTemplateColumns: "repeat(auto-fit, 220px)",
           padding: "35px",
-          justifyContent: "start",
+          justifyContent: "center",
         }}
       >
         {filteredPokemons.map((d) => (
@@ -127,3 +159,16 @@ const App = () => {
 };
 
 export default App;
+
+/*
+the flow of favourite/liking is:
+- we pass the function ontogglelike to card. this function activates when the button in the card is clicked.
+- on this function activation, togglefavourite gets activated for the specific id and checks if the id needs to be removed or added to the favourite list.
+- immediately after, the variable liked takes value true or false depending on whether that specific id is there in the list or not.
+- immediately after, the button turns red or white depending on the value of liked.
+- why did we not define toggleFavourite and consequently ontogglelike in card.jsx?
+---- Core rule: state (a dynamic thing, such as the favourites list) should live in the closest common parent that needs it.
+---- Favourites affect multiple cards, so it must live in App.jsx, not in EACH card.
+---- If you'd used usestate in card.jsx, each card will have it's own state (liked or no liked), but there will be no shared list, so you cannot filter favourites/show only favourites.
+---- App.jsx is the parent keeping a notebook of favourites, card is the child just information please add/remove this one, child only sends requests.
+*/
