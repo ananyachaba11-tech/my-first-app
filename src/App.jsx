@@ -99,7 +99,7 @@ const App = () => {
 
   /*
   "Fire.toLowerCase() gives "fire"
-  this is helpful when people write things in the input box in lower case. it takes both lower case and upper case values now.
+  this is helpful when people write things in the input box in lower case. it ignores case and just takes meaning.
   */
 
   return (

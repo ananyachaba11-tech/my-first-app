@@ -123,3 +123,15 @@ h1 {
 /*
 by default, <input> is inline. They sit like text in a line. display: block makes CSS treat input like a full-width box.
 */
+
+/*
+Changes I want to make:
+- Allow multiple buttons to be pressed at once
+- Buttons get highlighted / get darker on being pressed
+- HP and attack have bars
+- Animation to cards - selecting cards either makes the icon pop out or gives you a zoom into the card
+- Add a 'filter to' text before the buttons
+- Add sort by name, type, hit points, attack.
+- Add copyright, linkedin, github at end
+- For reference - Pete, Fabiano, Eliska Valterova
+*/
